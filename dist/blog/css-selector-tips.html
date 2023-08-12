@@ -29,14 +29,55 @@
 
     <main>
       <article><h1>CSS 选择器技巧</h1>
-<h2>特殊选择</h2>
-<p><code>[data-key=&quot;value&quot;]</code></p>
+<p>除了常用的类选择器和子代选择器外，还有许多实用的选法。</p>
 <h2>相邻选择</h2>
-<p><code>+</code> <code>~</code></p>
+<h3><code>~</code> 选择下一个兄弟元素</h3>
+<pre><code class="language-html">&lt;h1&gt;h1&lt;/h1&gt;
+&lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+&lt;h2&gt;h2&lt;/h2&gt;
+&lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+</code></pre>
+<pre><code class="language-css">h1 ~ h2 {
+  color: red;
+}
+</code></pre>
+<h3><code>+</code> 选择下一个直接相邻兄弟元素</h3>
+<pre><code class="language-html">&lt;h1&gt;h1&lt;/h1&gt;
+&lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+&lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+</code></pre>
+<pre><code class="language-css">h1 + p {
+  color: red;
+}
+</code></pre>
 <h2>父代选择</h2>
-<p><code>:has(seleter)</code></p>
-<h2>修复 bug</h2>
-<p>{{ use meta }}</p>
+<p><code>:has()</code></p>
+<pre><code class="language-html">&lt;div&gt;
+  &lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">div:has(p:hover) {
+  background-color: red;
+}
+</code></pre>
+<h2>排除选择</h2>
+<p><code>:not()</code></p>
+<pre><code class="language-html">&lt;div&gt;
+  &lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+  &lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+  &lt;p&gt;Lorem, ipsum dolor sit amet consectetur adipisicing elit.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-css">p:not(:last-child) {
+  color: red;
+}
+</code></pre>
+<h2>特殊选择</h2>
+<p><code>[data-<var>key</var>=&quot;<var>value</var>&quot;]</code></p>
+<pre><code class="language-css">p[data-type=&#39;title&#39;] {
+  color: red;
+}
+</code></pre>
 </article>
     </main>
 
