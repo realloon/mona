@@ -6,6 +6,7 @@ import { root } from '../../mona.config.js'
 import useIncludes from './useIncludes.js'
 import useVar from './useVar.js'
 import useMeat from './useMeat.js'
+import useStyle from './useStyle.js'
 import useList from './useList.js'
 import print from './utils/print.js'
 
@@ -23,6 +24,9 @@ export default async function createEnter() {
 
   // meta 插值
   index = useMeat(index)
+
+  // 样式插值
+  index = useStyle(index)
 
   // 文章列表插值
   index = await useList(index)

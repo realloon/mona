@@ -6,6 +6,7 @@ import { marked } from 'marked'
 import { root } from '../../mona.config.js'
 import getPosts from './getPosts.js'
 import useMeat from './useMeat.js'
+import useStyle from './useStyle.js'
 import useIncludes from './useIncludes.js'
 import useVar from './useVar.js'
 
@@ -25,7 +26,8 @@ export default async function getTransedPosts() {
 
       let post = postTemplate
 
-      post = useMeat(post, { title: heading, xxx: 'xxx' })
+      post = useMeat(post, { title: heading, key: 'value' })
+      post = useStyle(post)
       post = useIncludes(post)
       post = useVar(post)
 
