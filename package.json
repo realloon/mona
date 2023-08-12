@@ -1,0 +1,18 @@
+{
+  "name": "mona",
+  "version": "0.0.1",
+  "description": "静态博客生成工具",
+  "main": "src/index.js",
+  "scripts": {
+    "kit": "rollup --config",
+    "build": "node ./src/index.js",
+    "serve": "serve ./dist"
+  },
+  "keywords": [],
+  "author": "真真爱编程 ",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "marked": "^7.0.2"
+  }
+}
