@@ -5,7 +5,7 @@
   "main": "app/main.js",
   "scripts": {
     "kit": "rollup --config",
-    "build": "node ./src/index.js",
+    "build": "node ./app/main.js",
     "serve": "serve ./dist"
   },
   "keywords": [],
