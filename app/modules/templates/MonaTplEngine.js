@@ -1,21 +1,15 @@
-import concatMetaTags from './concatMetaTags.js'
-import mapTplVars from './mapTplVars.js'
-import mapTplIncldes from './mapTplIncldes.js'
-
 /**
  * Mona template engine.
  * @module MonaTplEngine
  */
 
-/**
- * Mona Template engine instance.
- * @typedef {object} MonaTplEngineInstance
- * @property {function} useMeta - Interpolation meta tags.
- * @property {function} useVars - Interpolation variables.
- * @property {function} useIncludesAsync - Interpolation includes.
- * @property {function} useContent - Interpolation layout content.
- * @property {function} render - Get rendered result.
- */
+import concatMetaTags from './concatMetaTags.js'
+import mapTplVars from './mapTplVars.js'
+import mapTplIncldes from './mapTplIncldes.js'
+import { cdn } from '../../../mona.config.js'
+import reduceStyleLinks from './reduceStyleLinks.js'
+
+const { styles } = cdn
 
 /**
  * Create a Mona template engine instance.
@@ -26,6 +20,7 @@ export default function MonaTplEngine(template) {
   const slots = {
     meta: '{{ use meta }}',
     list: '{{ use list }}',
+    style: '{{ use style }}',
   }
 
   let ctx = template
@@ -38,6 +33,15 @@ export default function MonaTplEngine(template) {
     useMeta(metas) {
       const metaTags = concatMetaTags(metas)
       const rendered = ctx.replace(slots.meta, metaTags)
+
+      ctx = rendered
+
+      return this
+    },
+
+    useStyle() {
+      const links = reduceStyleLinks(styles)
+      const rendered = ctx.replace(slots.style, links)
 
       ctx = rendered
 
@@ -82,3 +86,14 @@ export default function MonaTplEngine(template) {
     },
   }
 }
+
+/**
+ * Mona Template engine instance.
+ * @typedef {object} MonaTplEngineInstance
+ * @property {function} useMeta - Interpolation meta tags.
+ * @property {function} useStyle - Interpolation cdn styles.
+ * @property {function} useVars - Interpolation variables.
+ * @property {function} useIncludesAsync - Interpolation includes.
+ * @property {function} useContent - Interpolation layout content.
+ * @property {function} render - Get rendered result.
+ */

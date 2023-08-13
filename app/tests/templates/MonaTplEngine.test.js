@@ -12,6 +12,7 @@ const rendered = await ctx
   .then(enter =>
     enter
       .useMeta({ title: 'new title', author: 'whh' })
+      .useStyle()
       .useVars({ name: 'whh' })
       .render()
   )
