@@ -2,7 +2,7 @@
   "name": "mona",
   "version": "0.0.1",
   "description": "静态博客生成工具",
-  "main": "src/index.js",
+  "main": "app/main.js",
   "scripts": {
     "kit": "rollup --config",
     "build": "node ./src/index.js",
