@@ -8,7 +8,7 @@ import { isStringArray } from '../validators/baseValidators.js'
  */
 export default function concatStyleLinks(styles) {
   if (!isStringArray(styles)) {
-    throw new Error('An array of strings must be passed in.')
+    throw new Error('Invalid input: An array of strings must be passed in.')
   }
 
   return styles.reduce(

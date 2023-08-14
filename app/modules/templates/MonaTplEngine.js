@@ -9,7 +9,8 @@ import mapTplVars from './mapTplVars.js'
 import mapTplIncldes from './mapTplIncldes.js'
 import reduceStyleLinks from './reduceStyleLinks.js'
 // external dependency
-import { metas as configMetas } from '../../../mona.config.js'
+import { metas as rawMetas } from '../../../mona.config.js'
+import { data as rawVars } from '../../../mona.config.js'
 import { cdn } from '../../../mona.config.js'
 const { styles } = cdn
 
@@ -33,7 +34,7 @@ export default function MonaTplEngine(template) {
      * @returns {MonaTplEngineInstance}
      */
     useMeta(metas) {
-      const metaTags = reduceMetaTags(metas)
+      const metaTags = reduceMetaTags(rawMetas, metas)
       const rendered = ctx.replace(slots.meta, metaTags)
 
       ctx = rendered
@@ -56,7 +57,7 @@ export default function MonaTplEngine(template) {
      * @returns {MonaTplEngineInstance}
      */
     useVars(variables) {
-      const mapedSlotArr = mapTplVars(ctx, variables)
+      const mapedSlotArr = mapTplVars(ctx, rawVars, variables)
 
       mapedSlotArr.forEach(({ slot, value }) => {
         ctx = ctx.replace(slot, value)

@@ -9,7 +9,7 @@ import { isObject } from '../validators/baseValidators.js'
  */
 export default function reduceMetaTags(configMetas, customMetas) {
   if (!isObject(configMetas) && !isObject(customMetas)) {
-    throw Error('At least one meta object must be passed in.')
+    throw Error('Invalid input: At least one meta object must be passed in.')
   }
 
   const assignedMetas = Object.assign(

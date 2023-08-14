@@ -1,20 +1,26 @@
-import { data } from '../../../mona.config.js'
-import validateMapTplVarsArgs from '../validators/validateMapTplVarsArgs.js'
+import { isString, isObject } from '../validators/baseValidators.js'
 
 /**
- * @typedef {object} SlotObject
- * @property {string} slot
- * @property {string} value
+ * Maps template variables to their corresponding values in configVariables and customVariables objects.
+ * @param {string} template - The template string.
+ * @param {Object} configVariables - The configVariables object.
+ * @param {Object} customVariables - The customVariables object.
+ * @returns {Array} An array of objects representing the mapped template variables.
+ * @throws {Error} If template is not a string or if neither configVariables nor customVariables is an object.
  */
+export default function mapTplVars(template, configVariables, customVariables) {
+  if (!isString(template)) {
+    throw new Error('Invalid input: template must be a string')
+  }
+  if (!isObject(configVariables) && !isObject(customVariables)) {
+    throw new Error('Invalid input: At least one object is required.')
+  }
 
-/**
- * Map template variables
- * @param {string} template - Template string with variables.
- * @param {object} variables - Contains variables and their values.
- * @returns {Array<SlotObject>} - Replaced variable array with variable names and values.
- */
-export default function mapTplVars(template, variables) {
-  const { assignedVars } = validateMapTplVarsArgs(template, variables, data)
+  const assignedVars = Object.assign(
+    Object.create(null),
+    configVariables,
+    customVariables
+  )
 
   const reg = /{{ (\w+) }}/g
 
