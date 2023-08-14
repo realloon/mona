@@ -3,12 +3,14 @@
  * @module MonaTplEngine
  */
 
-import concatMetaTags from './concatMetaTags.js'
+// extractor
+import reduceMetaTags from './reduceMetaTags.js'
 import mapTplVars from './mapTplVars.js'
 import mapTplIncldes from './mapTplIncldes.js'
-import { cdn } from '../../../mona.config.js'
 import reduceStyleLinks from './reduceStyleLinks.js'
-
+// external dependency
+import { metas as configMetas } from '../../../mona.config.js'
+import { cdn } from '../../../mona.config.js'
 const { styles } = cdn
 
 /**
@@ -31,7 +33,7 @@ export default function MonaTplEngine(template) {
      * @returns {MonaTplEngineInstance}
      */
     useMeta(metas) {
-      const metaTags = concatMetaTags(metas)
+      const metaTags = reduceMetaTags(metas)
       const rendered = ctx.replace(slots.meta, metaTags)
 
       ctx = rendered

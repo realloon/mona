@@ -4,9 +4,15 @@ import {
   isNumber,
   isUndefined,
   isStringArray,
+  isObject,
 } from '../../modules/validators/baseValidators.js'
 
-console.log(isStringArray(['1', '2', '3']))
+// isObject
+// console.log(isObject({}))
+// console.log(isObject([]))
+// console.log(isObject())
+
+// console.log(isStringArray(['1', '2', '3']))
 
 // console.log(isString('hello'))
 

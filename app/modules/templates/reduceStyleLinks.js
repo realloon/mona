@@ -2,7 +2,7 @@ import { isStringArray } from '../validators/baseValidators.js'
 
 /**
  * Concatenates an array of style links into a single string.
- * @param {Array} styles - An array of style links.
+ * @param {string[]} styles - An array of style links.
  * @returns {string} The concatenated style links.
  * @throws {Error} If an array of strings is not passed in.
  */
@@ -16,9 +16,3 @@ export default function concatStyleLinks(styles) {
     ''
   )
 }
-
-/**
- * Concatenate style links into a single string.
- * @param {string[]} styles - The array of style links.
- * @returns {string} - The concatenated style links string.
- */
