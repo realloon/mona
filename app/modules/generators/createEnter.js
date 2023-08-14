@@ -4,15 +4,18 @@ import getFileDetails from '../utils/getFileDetails.js'
 import print from '../utils/print.js'
 
 export default async function createEnter() {
-  const { content: enterTpl } = await getFileDetails('./src/index.html')
-  const ctx = MonaTplEngine(enterTpl)
+  const { content } = await getFileDetails('./src/index.html')
+  const engine = MonaTplEngine(content)
 
   try {
-    const index = await ctx
-      .useIncludesAsync()
-      .then(ctx => ctx.useMeta().useStyle().useVars().render())
+    await engine.useIncludesAsync()
+    engine.useMeta()
+    engine.useStyle()
+    
+    const enter = engine.render()
 
-    await fs.writeFile('./dist/index.html', index)
+    await fs.writeFile('./dist/index.html', enter)
+
     print('🏠 Website entry successfully built.')
   } catch (error) {
     throw error

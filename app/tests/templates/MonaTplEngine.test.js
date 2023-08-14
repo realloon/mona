@@ -5,25 +5,26 @@ import MonaTplEngine from '../../modules/templates/MonaTplEngine.js'
 
 const { content: template } = await getFileDetails('./src/index.html')
 
-const ctx = MonaTplEngine(template)
+// #region async/await calling
+const engine1 = MonaTplEngine(template)
+await engine1.useIncludesAsync()
+engine1.useMeta({ title: 'new title', author: 'whh' })
+engine1.useStyle()
+engine1.useVars({ name: 'whh' })
+const rendered1 = engine1.render()
+console.log(rendered1)
+// #endregion
 
-const rendered = await ctx
+// #region
+const engine2 = MonaTplEngine(template)
+const rendered2 = await engine2
   .useIncludesAsync()
-  .then(enter =>
-    enter
+  .then(ctx =>
+    ctx
       .useMeta({ title: 'new title', author: 'whh' })
       .useStyle()
       .useVars({ name: 'whh' })
       .render()
   )
-
-console.log(rendered)
-
-// #endregion chained calling
-
-// #region async/await calling
-// ctx.useMeta({ title: 'new Title' })
-// ctx.useVars({ name: 'whh' })
-// await ctx.useIncludes()
-// console.log(ctx.render())
-// #endregion async/await calling
+console.log(rendered2)
+// #endregion

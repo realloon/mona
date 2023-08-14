@@ -8,6 +8,7 @@ import reduceMetaTags from './reduceMetaTags.js'
 import mapTplVars from './mapTplVars.js'
 import mapTplIncldes from './mapTplIncldes.js'
 import reduceStyleLinks from './reduceStyleLinks.js'
+
 // external dependency
 import { metas as rawMetas } from '../../../mona.config.js'
 import { data as rawVars } from '../../../mona.config.js'
@@ -24,6 +25,7 @@ export default function MonaTplEngine(template) {
     meta: '{{ use meta }}',
     list: '{{ use list }}',
     style: '{{ use style }}',
+    content: '{{ use content }}',
   }
 
   let ctx = template
@@ -72,6 +74,12 @@ export default function MonaTplEngine(template) {
       mapedSlotArr.forEach(({ slot, value }) => {
         ctx = ctx.replace(slot, value)
       })
+
+      return this
+    },
+
+    useContent(content) {
+      ctx = ctx.replace(slots.content, content)
 
       return this
     },
