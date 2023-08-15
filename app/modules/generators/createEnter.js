@@ -3,23 +3,30 @@ import MonaTplEngine from '../templates/MonaTplEngine.js'
 import getFileDetails from '../utils/getFileDetails.js'
 import print from '../utils/print.js'
 
+console.time('Enter')
+
 export default async function createEnter() {
-  const { content } = await getFileDetails('./src/index.html')
-  const engine = MonaTplEngine(content)
+  const { content: tpl } = await getFileDetails('./src/index.html')
+  const engine = MonaTplEngine(tpl)
+
+  await engine.useIncludesAsync()
+  await engine.useListAsync()
+  engine.useMeta()
+  engine.useStyle()
+  engine.useVars()
+
+  const enter = engine.render()
 
   try {
-    await engine.useIncludesAsync()
-    engine.useMeta()
-    engine.useStyle()
-    
-    const enter = engine.render()
-
     await fs.writeFile('./dist/index.html', enter)
 
     print('🏠 Website entry successfully built.')
+    console.timeEnd('Enter')
   } catch (error) {
-    throw error
-  } finally {
-    console.timeLog('timer')
+    if (error.code === 'ENOENT') {
+      throw new Error('The "/dist/" folder must exist.')
+    } else {
+      throw error
+    }
   }
 }

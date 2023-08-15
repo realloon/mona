@@ -1,3 +1,3 @@
-import creatPosts from '../../modules/generators/creatPosts.js'
+import createPosts from '../../modules/generators/createPosts.js'
 
-creatPosts()
+createPosts()

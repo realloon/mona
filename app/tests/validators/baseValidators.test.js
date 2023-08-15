@@ -5,6 +5,7 @@ import {
   isUndefined,
   isStringArray,
   isObject,
+  isPromise,
 } from '../../modules/validators/baseValidators.js'
 
 // isObject

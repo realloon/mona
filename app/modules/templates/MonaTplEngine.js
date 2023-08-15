@@ -4,16 +4,21 @@
  */
 
 // extractor
+import { isString } from '../validators/baseValidators.js'
 import reduceMetaTags from './reduceMetaTags.js'
 import mapTplVars from './mapTplVars.js'
 import mapTplIncldes from './mapTplIncldes.js'
+import reduceListTags from './reduceListTags.js'
 import reduceStyleLinks from './reduceStyleLinks.js'
 
 // external dependency
-import { metas as rawMetas } from '../../../mona.config.js'
-import { data as rawVars } from '../../../mona.config.js'
-import { cdn } from '../../../mona.config.js'
-const { styles } = cdn
+import {
+  metas as rawMetas,
+  data as rawVars,
+  cdn,
+  slots,
+  dir,
+} from '../../../mona.config.js'
 
 /**
  * Create a Mona template engine instance.
@@ -21,11 +26,8 @@ const { styles } = cdn
  * @returns {MonaTplEngineInstance} Mona template engine instance object.
  */
 export default function MonaTplEngine(template) {
-  const slots = {
-    meta: '{{ use meta }}',
-    list: '{{ use list }}',
-    style: '{{ use style }}',
-    content: '{{ use content }}',
+  if (!isString(template)) {
+    throw new Error('Invalid input: A string must be passed in.')
   }
 
   let ctx = template
@@ -45,7 +47,7 @@ export default function MonaTplEngine(template) {
     },
 
     useStyle() {
-      const links = reduceStyleLinks(styles)
+      const links = reduceStyleLinks(cdn.styles)
       const rendered = ctx.replace(slots.style, links)
 
       ctx = rendered
@@ -69,7 +71,7 @@ export default function MonaTplEngine(template) {
     },
 
     async useIncludesAsync() {
-      const mapedSlotArr = await mapTplIncldes(ctx)
+      const mapedSlotArr = await mapTplIncldes(ctx, slots.include)
 
       mapedSlotArr.forEach(({ slot, value }) => {
         ctx = ctx.replace(slot, value)
@@ -84,7 +86,11 @@ export default function MonaTplEngine(template) {
       return this
     },
 
-    useList() {
+    async useListAsync() {
+      const listTages = await reduceListTags(dir.posts)
+
+      ctx = ctx.replace(slots.list, listTages)
+      
       return this
     },
 
@@ -104,6 +110,7 @@ export default function MonaTplEngine(template) {
  * @property {function} useMeta - Interpolation meta tags.
  * @property {function} useStyle - Interpolation cdn styles.
  * @property {function} useVars - Interpolation variables.
+ * @property {function} useListAsync - Interpolation posts list.
  * @property {function} useIncludesAsync - Interpolation includes.
  * @property {function} useContent - Interpolation layout content.
  * @property {function} render - Get rendered result.

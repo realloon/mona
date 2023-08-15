@@ -1,13 +1,12 @@
-export const isNumber = value => typeof value === 'number'
+export const isNumber = val => typeof val === 'number'
 
-export const isBoolean = value => typeof value === 'boolean'
+export const isBoolean = val => typeof val === 'boolean'
 
-export const isUndefined = value => typeof value === 'undefined'
+export const isUndefined = val => typeof val === 'undefined'
 
-export const isString = value => typeof value === 'string'
+export const isString = val => typeof val === 'string'
 
-export const isObject = value =>
-  value instanceof Object && !Array.isArray(value)
+export const isObject = val => val instanceof Object && !Array.isArray(val)
 
 export const isStringArray = arr =>
   Array.isArray(arr) && arr.every(e => isString(e))

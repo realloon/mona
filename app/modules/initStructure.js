@@ -1,18 +1,18 @@
-import path from 'path'
 import fs from 'fs/promises'
-//
-import { root } from '../../mona.config.js'
 import print from './utils/print.js'
 
+console.time('init')
+
 export default async function initStructure() {
-  // 创建目录结构
-  const blogPath = path.join(root, './dist/blog')
+  const path = './dist/blog'
+
   try {
-    await fs.access(blogPath)
+    await fs.access(path)
   } catch (error) {
     if (error.code === 'ENOENT') {
-      await fs.mkdir(blogPath, { recursive: true })
+      await fs.mkdir(path, { recursive: true })
       print('📁 Directory structure successfully built.')
+      console.timeEnd('init')
     } else {
       throw error
     }

@@ -1,6 +1,7 @@
 import mapTplIncldes from '../../modules/templates/mapTplIncldes.js'
 
-const tmp = '{{ include "header" }}hello{{ include "footer" }}'
+const tpl = '{{ include "header" }}hello{{ include "footer" }}'
+const reg = /{{ include "(\w+?)" }}/g
 
-console.log(await mapTplIncldes(tmp))
+console.log(await mapTplIncldes(tpl, reg))
 debugger

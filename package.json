@@ -1,7 +1,7 @@
 {
   "name": "mona",
-  "version": "0.0.1",
-  "description": "静态博客生成工具",
+  "version": "0.0.2",
+  "description": "Static blog generator.",
   "main": "app/main.js",
   "scripts": {
     "kit": "rollup --config",
@@ -9,10 +9,10 @@
     "serve": "serve ./dist"
   },
   "keywords": [],
-  "author": "真真爱编程 ",
+  "author": "realloon ",
   "license": "ISC",
-  "type": "module",
   "devDependencies": {
     "marked": "^7.0.2"
-  }
+  },
+  "type": "module"
 }

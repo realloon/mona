@@ -20,3 +20,15 @@ export const cdn = {
   styles: ['//at.alicdn.com/t/c/font_4206319_7d2kn7spge3.css'],
   scripts: [],
 }
+
+export const slots = {
+  meta: '{{ use meta }}',
+  list: '{{ use list }}',
+  style: '{{ use style }}',
+  content: '{{ use content }}',
+  include: /{{ include "(\w+?)" }}/g,
+}
+
+export const dir = {
+  posts: './src/posts',
+}
