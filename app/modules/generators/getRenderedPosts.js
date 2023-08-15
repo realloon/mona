@@ -6,10 +6,10 @@ export default async function getRenderedPosts(templatePath, sourcesPath) {
   const postTpl = await getPostTpl(templatePath)
   const posts = await getPostDetails(sourcesPath)
 
-  return posts.map(({ title, content: rawCtx }) => {
+  return posts.map(({ title, content: rawCtx, metas }) => {
     const engine = MonaTplEngine(postTpl)
 
-    engine.useMeta({ title })
+    engine.useMeta({ ...metas })
     engine.useContent(rawCtx)
     const content = engine.render()
 

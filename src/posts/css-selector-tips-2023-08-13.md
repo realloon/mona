@@ -1,7 +1,6 @@
 ---
-title: My Page
-author: John Doe
-date: 2022-01-01
+title: CSS 选择器技巧
+date: 2023-08-13
 ---
 
 # CSS 选择器技巧

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url'
 export const root = path.dirname(fileURLToPath(import.meta.url))
 
 export const metas = {
-  author: 'realoon',
+  author: 'Realoon',
   title: 'Realoon',
   description: "realloon's blog",
   generator: 'mona',
