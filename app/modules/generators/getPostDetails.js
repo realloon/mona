@@ -1,7 +1,7 @@
 import { marked } from 'marked'
 import getFileDetails from '../utils/getFileDetails.js'
 
-export default async function getPostDetails(path) {
+export default async function getPostDetails(path = './src/posts') {
   const files = await getFileDetails(path)
 
   return files.map(({ content: rawCtx, fileName, modifiedTime }) => {

@@ -2,8 +2,6 @@ import fs from 'fs/promises'
 import getRenderedPosts from './getRenderedPosts.js'
 import print from '../utils/print.js'
 
-console.time('posts')
-
 export default async function createPosts(
   templatePath = './src/layouts/post.html',
   sourcesPath = './src/posts'
@@ -18,7 +16,6 @@ export default async function createPosts(
     )
 
     print('📝 Blog posts successfully built.')
-    console.timeEnd('posts')
   } catch (error) {
     if (error.code === 'ENOENT') {
       throw new Error('The "/dist/blog/" folder must exist.')
