@@ -6,10 +6,9 @@ export default async function getPostDetails(path = './src/posts') {
 
   return files.map(({ content: rawCtx, fileName, modifiedTime }) => {
     const title = fileName.slice(0, -14)
-    const content = marked(rawCtx)
     const publicTime = fileName.slice(-13, -3)
     const href = encodeURI(`/blog/${title}.html`)
-    const metas = extractMetas(rawCtx)
+    const { html: content, metas } = parseContent(rawCtx)
 
     return {
       title,
@@ -22,19 +21,33 @@ export default async function getPostDetails(path = './src/posts') {
   })
 }
 
-function extractMetas(content) {
-  const lines = content.split('\n').map(line => line.trim())
-  const start = lines.indexOf('---')
-  const end = lines.indexOf('---', start + 1)
+function parseContent(content) {
+  const lines = content.trim().split('\n')
+  const start = lines.findIndex(line => line.trim() === '---')
 
-  if (start === -1 || end === -1) return null
+  if (start === -1) {
+    return {
+      html: marked(content),
+      metas: null,
+    }
+  }
+
+  const end = lines.findIndex(
+    (line, index) => index > start && line.trim() === '---'
+  )
 
   const metas = Object.create(null)
 
   lines
     .slice(start + 1, end)
-    .map(line => line.match(/(.*?):\s(.*)/)) // TODO: can still be further optimized.
+    .map(line => line.match(/(.*?):\s(.*)/))
     .forEach(([_, key, val]) => (metas[key] = val))
 
-  return metas
+  const markdownContent = lines.slice(end + 1).join('\n')
+  const htmlContent = marked(markdownContent)
+
+  return {
+    html: htmlContent,
+    metas: metas,
+  }
 }

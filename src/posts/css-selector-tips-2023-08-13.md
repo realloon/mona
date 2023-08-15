@@ -74,7 +74,7 @@ p:not(:last-child) {
 
 ## 特殊选择
 
-`[data-<var>key</var>="<var>value</var>"]`
+`[data-key="value"]`
 
 ```css
 p[data-type='title'] {
