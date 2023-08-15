@@ -1,3 +1,9 @@
+---
+title: My Page
+author: John Doe
+date: 2022-01-01
+---
+
 # CSS 选择器技巧
 
 除了常用的类选择器和子代选择器外，还有许多实用的选法。

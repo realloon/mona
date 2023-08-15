@@ -1,10 +1,10 @@
-console.time('Total')
-
 import initStructure from './modules/initStructure.js'
 import createEnter from './modules/generators/createEnter.js'
 import createPosts from './modules/generators/createPosts.js'
 import copyPublicFiles from './modules/copyPublicFiles.js'
 import print from './modules/utils/print.js'
+
+console.time('Total')
 
 try {
   await initStructure() // initializing directory structure
