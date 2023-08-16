@@ -4,7 +4,7 @@
  */
 
 // extractor
-import { isString } from '../validators/baseValidators.js'
+import { isString } from '../validators/validators.js'
 import reduceMetaTags from './reduceMetaTags.js'
 import mapTplVars from './mapTplVars.js'
 import mapTplIncldes from './mapTplIncldes.js'

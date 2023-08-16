@@ -1,4 +1,4 @@
-import { isObject } from '../validators/baseValidators.js'
+import { isObject } from '../validators/validators.js'
 
 /**
  * Reduces and concatenates meta tags from configMetas and customMetas objects.

@@ -1,4 +1,4 @@
-import { isString, isObject } from '../validators/baseValidators.js'
+import { isString, isObject } from '../validators/validators.js'
 
 /**
  * Maps template variables to their corresponding values in configVariables and customVariables objects.

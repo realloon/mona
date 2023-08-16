@@ -6,7 +6,7 @@ import {
   isStringArray,
   isObject,
   isPromise,
-} from '../../modules/validators/baseValidators.js'
+} from '../../modules/validators/validators.js'
 
 // isObject
 // console.log(isObject({}))

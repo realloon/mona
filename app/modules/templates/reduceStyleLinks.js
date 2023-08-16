@@ -1,4 +1,4 @@
-import { isStringArray } from '../validators/baseValidators.js'
+import { isStringArray } from '../validators/validators.js'
 
 /**
  * Concatenates an array of style links into a single string.
