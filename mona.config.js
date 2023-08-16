@@ -13,7 +13,7 @@ export const metas = {
 export const data = {
   name: 'Realoon',
   year: new Date().getFullYear(),
-  var: 'mona',
+  rep: 'https://github.com/realloon/mona',
 }
 
 export const cdn = {
