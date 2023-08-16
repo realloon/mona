@@ -23,7 +23,7 @@ import {
 /**
  * Create a Mona template engine instance.
  * @param {string} template - Template string.
- * @returns {MonaTplEngineInstance} Mona template engine instance object.
+ * @returns {MonaTplEngineInstance} - Mona template engine instance object.
  */
 export default function MonaTplEngine(template) {
   if (!isString(template)) {
@@ -34,8 +34,9 @@ export default function MonaTplEngine(template) {
 
   return {
     /**
-     * Interpolation meta tags
-     * @returns {MonaTplEngineInstance}
+     * Interpolates meta tags in the template.
+     * @param {object} metas - The metadata to be interpolated.
+     * @returns {MonaTplEngineInstance} - The Mona template engine instance object.
      */
     useMeta(metas) {
       const metaTags = reduceMetaTags(rawMetas, metas)
@@ -46,6 +47,10 @@ export default function MonaTplEngine(template) {
       return this
     },
 
+    /**
+     * Interpolates style links in the template.
+     * @returns {MonaTplEngineInstance} - The Mona template engine instance object.
+     */
     useStyle() {
       const links = reduceStyleLinks(cdn.styles)
       const rendered = ctx.replace(slots.style, links)
@@ -56,9 +61,9 @@ export default function MonaTplEngine(template) {
     },
 
     /**
-     * Interpolation variables.
-     * @param {object} variables
-     * @returns {MonaTplEngineInstance}
+     * Interpolates variables in the template.
+     * @param {object} variables - The variables to be interpolated.
+     * @returns {MonaTplEngineInstance} - The Mona template engine instance object.
      */
     useVars(variables) {
       const mapedSlotArr = mapTplVars(ctx, rawVars, variables)
@@ -70,6 +75,10 @@ export default function MonaTplEngine(template) {
       return this
     },
 
+    /**
+     * Interpolates includes in the template asynchronously.
+     * @returns {Promise<MonaTplEngineInstance>} - A promise that resolves to the Mona template engine instance object.
+     */
     async useIncludesAsync() {
       const mapedSlotArr = await mapTplIncldes(ctx, slots.include)
 
@@ -80,23 +89,32 @@ export default function MonaTplEngine(template) {
       return this
     },
 
+    /**
+     * Interpolates the content in the template.
+     * @param {string} content - The content to be interpolated.
+     * @returns {MonaTplEngineInstance} - The Mona template engine instance object.
+     */
     useContent(content) {
       ctx = ctx.replace(slots.content, content)
 
       return this
     },
 
+    /**
+     * Interpolates the posts list in the template asynchronously.
+     * @returns {Promise<MonaTplEngineInstance>} - A promise that resolves to the Mona template engine instance object.
+     */
     async useListAsync() {
       const listTages = await reduceListTags(dir.posts)
 
       ctx = ctx.replace(slots.list, listTages)
-      
+
       return this
     },
 
     /**
-     * Get rendered result
-     * @returns {string} Rendered template result.
+     * Gets the rendered result of the template.
+     * @returns {string} - The rendered template result.
      */
     render() {
       return ctx
@@ -107,11 +125,11 @@ export default function MonaTplEngine(template) {
 /**
  * Mona Template engine instance.
  * @typedef {object} MonaTplEngineInstance
- * @property {function} useMeta - Interpolation meta tags.
- * @property {function} useStyle - Interpolation cdn styles.
- * @property {function} useVars - Interpolation variables.
- * @property {function} useListAsync - Interpolation posts list.
- * @property {function} useIncludesAsync - Interpolation includes.
- * @property {function} useContent - Interpolation layout content.
- * @property {function} render - Get rendered result.
+ * @property {function} useMeta - Interpolates meta tags.
+ * @property {function} useStyle - Interpolates style links.
+ * @property {function} useVars - Interpolates variables.
+ * @property {function} useListAsync - Interpolates posts list asynchronously.
+ * @property {function} useIncludesAsync - Interpolates includes asynchronously.
+ * @property {function} useContent - Interpolates layout content.
+ * @property {function} render - Gets the rendered result.
  */

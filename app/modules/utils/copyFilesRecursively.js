@@ -1,6 +1,12 @@
 import fs from 'fs/promises'
 import path from 'path'
 
+/**
+ * Copies files recursively from the source directory to the destination directory.
+ * @param {string} srcDir - The path to the source directory.
+ * @param {string} destDir - The path to the destination directory.
+ * @returns {Promise<void>} - A Promise that resolves when the files are successfully copied.
+*/
 export default async function copyFilesRecursively(srcDir, destDir) {
   const files = await fs.readdir(srcDir)
 

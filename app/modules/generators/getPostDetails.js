@@ -1,6 +1,11 @@
 import { marked } from 'marked'
 import getFileDetails from '../utils/getFileDetails.js'
 
+/**
+ * Retrieves details of the blog posts from source files.
+ * @param {string} path - The path to the folder containing the source files for the blog posts. Default is "./src/posts".
+ * @returns {Promise<Object[]>} - A Promise that resolves to an array of blog post details.
+ */
 export default async function getPostDetails(path = './src/posts') {
   const files = await getFileDetails(path)
 
@@ -21,6 +26,11 @@ export default async function getPostDetails(path = './src/posts') {
   })
 }
 
+/**
+ * Parses the content of a blog post to extract the metadata and convert the markdown content to HTML.
+ * @param {string} content - The content of the blog post.
+ * @returns {Object} - An object containing the HTML content and metadata of the blog post.
+ */
 function parseContent(content) {
   const lines = content.trim().split('\n')
   const start = lines.findIndex(line => line.trim() === '---')
