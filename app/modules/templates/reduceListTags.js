@@ -9,6 +9,7 @@ export default async function reduceListTags() {
 
   const r = posts.reduce((pre, cur) => {
     const { title, metas } = cur
+    debugger
     return `${pre}<li><a href="/blog/${title}.html">${metas.title}</a><time>${metas.date}</time></li>`
   }, '<ul>')
 

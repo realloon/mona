@@ -1,3 +1,4 @@
+import { basename, extname } from 'path'
 import { marked } from 'marked'
 import getFileDetails from '../utils/getFileDetails.js'
 
@@ -10,15 +11,13 @@ export default async function getPostDetails(path = './src/posts') {
   const files = await getFileDetails(path)
 
   return files.map(({ content: rawCtx, fileName, modifiedTime }) => {
-    const title = fileName.slice(0, -14)
-    const publicTime = fileName.slice(-13, -3)
+    const title = basename(fileName, extname(fileName))
     const href = encodeURI(`/blog/${title}.html`)
     const { html: content, metas } = parseContent(rawCtx)
 
     return {
       title,
       content,
-      publicTime,
       modifiedTime,
       href,
       metas,
