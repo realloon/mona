@@ -5,18 +5,22 @@
 }
 
 body {
-  font-family: 'LXGW WenKai Screen';
+  font-family: 'LXGW WenKai Screen', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--black);
   margin: 0 auto;
   padding: 0 24px;
-  max-width: 687px;
+  max-width: 768px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  @media (max-width: 425px) {
+    padding: 0 16px;
+  }
 }
 
 header {
@@ -31,7 +35,7 @@ header > ul {
   padding-left: 0;
   margin: 0;
   display: flex;
-  gap: 12px;
+  gap: 14px;
 }
 
 header > ul:first-child {
@@ -156,6 +160,10 @@ hr {
   font-style: italic;
   font-size: 0.75em;
   opacity: 0.5;
+
+  @media (max-width: 425px) {
+    font-style: inherit;
+  }
 }
 
 /* #endregion blogs */
@@ -168,7 +176,7 @@ hr {
 .icon-cat {
   color: var(--black);
 }
-.icon-project:hover {
+.icon-profile:hover {
   color: #2196f3;
 }
 .icon-api:hover {

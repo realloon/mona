@@ -17,7 +17,10 @@ export const data = {
 }
 
 export const cdn = {
-  styles: ['//at.alicdn.com/t/c/font_4206319_7d2kn7spge3.css'],
+  styles: [
+    '//at.alicdn.com/t/c/font_4206319_16ttf41hwjy.css',
+    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css',
+  ],
   scripts: [],
 }
 
