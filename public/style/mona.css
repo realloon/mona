@@ -1,5 +1,16 @@
+/* #region reset */
+body {
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* #endregion */
+
 :root {
   font-size: 17px;
+  --container-width: 768px;
   --black: #0f172a;
   --gray: #a0aec0;
 }
@@ -7,13 +18,8 @@
 body {
   font-family: 'LXGW WenKai Screen', sans-serif;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: var(--black);
-  margin: 0 auto;
   padding: 0 24px;
-  max-width: 768px;
-  min-height: 100vh;
+  color: var(--black);
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -21,6 +27,14 @@ body {
   @media (max-width: 425px) {
     padding: 0 16px;
   }
+}
+
+header,
+main,
+footer {
+  max-width: var(--container-width);
+  padding-left: calc((100% - var(--container-width)) / 2);
+  padding-right: calc((100% - var(--container-width)) / 2);
 }
 
 header {
@@ -51,6 +65,17 @@ header > ul > li {
 
 main {
   flex-grow: 1;
+  animation: init 0.8s;
+}
+
+@keyframes init {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 footer {
